@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Data security</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dil.css">
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						
+						<div id="left">
+							<img src="img/DIL_logo_safespace_RGBFull Color.svg" alt="DIL logo" width="400">
+						</div>
+												
+						# Data security
+						February 10, 2023
+
+					</textarea>
+				</section>
+
+
+				<section data-background="#80001E">
+					<h2>Data storage</h2>
+				</section>
+
+				<section data-markdown>
+					<textarea data-template>
+						## Where?
+
+						**UChicago Box**
+
+						- Its defaults levels of encryption are good enough for almost all data, including personally identifying information and most personal health information
+						- You do not need additional file encryption when storing data in Box, unless your data contains extra sensitive fields
+						- If you are not sure if your data needs additional layers of security, check with the Chief Information Security Officer at ciso@uchicago.edu
+						- For more information on this, see the [University Data Usage Guide](http://dataguide.uchicago.edu/)
+						
+						---
+						## Who
+						
+						- Do not place data on publicly shared folders
+						- Be mindful of who has access to the folders that contain your data 
+						- To share data, add collaborators to folders instead of sharing links
+						- Only add collaborators at the minimum access level they require
+						- Only add collaborators that have signed a confidentiality agreement or, if external, signed a data sharing agreement
+						- If your data contains sensitive information, only share it with people listed in the IRB
+						
+						---
+						## How
+
+						- Only use UChicago-managed computers to work with proprietary or sensitive data
+						- Follow the University's policy on [Baseline Protection of End User Devices](http://its.uchicago.edu/baseline-protection-of-end-user-devices/), including enabling full disk encryption and installing updates regularly
+						- Use Box Drive (not Box Sync) to access the data, but do not download them to your hard drive. That is, do not check the option to make them available offline, and do not download them manually
+						- To add another layer of security, use cVPN connection when working with sensitive data files off-campus
+						- For more information about how to keep your devices and your information safe, see https://security.uchicago.edu/
+
+						---
+						## Full disk encryption
+
+						- Bitlocker on Windows and FileVault 2 on Mac
+						- Checking for disk encryption on **DELL** computers: Start `>` Dell data security console
+						- Checking for disk encryption on **Apple** computers: System Preferences `>` Security & Privacy `>` FileVault
+					</textarea>
+				</section>
+
+				
+				  <section data-background="#faa319">
+					<h2>
+						<span class="white">
+							Questions?
+						</span>
+					</h2>
+				</section>
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
