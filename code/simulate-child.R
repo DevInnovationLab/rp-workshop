@@ -4,7 +4,8 @@ packages <-
   c(
     "fabricatr",
     "tidyverse",
-    "here"
+    "here",
+    "dataReporter"
   )
 
 pacman::p_load(
@@ -27,26 +28,50 @@ children <-
     ),
     mother_index = add_level(
       N = n_mothers,
-      mother_age = runif(N, min = 20, max = 50) %>% round(0),
+      mother_age = runif(N, min = 15, max = 50) %>% round(0),
+      mother_yob = 2022 - mother_age,
       mother_educ = rnorm(N, mean = 9, sd = 3.5) %>% round(0),
-      n_children = rpois(N, lambda = 2)
+      n_children = rpois(N, lambda = 2),
+      flag_m_year = rbinom(N, 1, prob = .05),
+      flag_m_age = rbinom(N, 1, prob = .1),
+      flag_n_age = runif(N, min = -5, max = 5),
+      flag_m_children = rbinom(N, 1, prob = .05),
+      flag_n_children = runif(N, min = -1, max = 2)
     ),
     child_index = add_level(
       N = n_children,
       age = runif(N, min = 2, max = 15) %>% round(0),
-      sex = rbinom(N, 1, prob = .5) %>% 
+      yob = 2022 - age,
+      sex = runif(N, min = 1, max = 6) %>% round(0) %>% 
         factor(
-          levels = 0:1,
-          labels = c("Male", "Female")
-        ),
+          levels = 1:6,
+          labels = c("Male", "Female", "M", "F", "male", "female")
+        ) %>%
+        as.character,
       in_school = ifelse(
         age >= 6, 
         rbinom(N, 1, prob = .9), 
         rbinom(N, 1, prob = .4)
-      )
+      ),
+      grade = ifelse(in_school, age - 5, NA),
+      flag_c_year = rbinom(N, 1, prob = .05),
+      flag_c_grade = rbinom(N, 1, prob = .02),
+      flag_n_grade = rpois(N, lambda = 3),
+      flag_c_grade_dk = rbinom(N, 1, prob = .05)
     )
   ) %>%
-  select(-n_mothers)
+  mutate(
+    mother_yob = ifelse(flag_m_year, -99, mother_yob),
+    mother_age = ifelse(flag_m_age, mother_age + flag_n_age, mother_age),
+    n_children = ifelse(flag_m_children, n_children + flag_n_children, n_children),
+    yob = ifelse(flag_c_year, 9999, yob),
+    grade = ifelse(flag_c_grade, grade + flag_n_grade, grade),
+    grade = ifelse(flag_c_grade_dk, NA, grade)
+  ) %>%
+  select(
+    -n_mothers,
+    -starts_with("flag")
+  )
 
 # Create mother-level tidy data ------------------------------------------------
 
@@ -61,6 +86,7 @@ mother_tidy <-
       as.character() %>%
       str_pad(2, "0", side  = "left") %>%
       paste0(village_id, .),
+    yob = mother_yob,
     age = mother_age,
     educ = mother_educ,
     n_children,
@@ -96,8 +122,10 @@ child_tidy <-
     child_id = child_no %>%
       str_pad(2, "0", side  = "left") %>%
       paste0(mother_id, .),
+    yob,
     age,
     sex,
+    grade,
     in_school
   ) %>%
   ungroup
