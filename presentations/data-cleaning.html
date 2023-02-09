@@ -38,187 +38,187 @@
 
 				<section data-markdown data-separator-notes="^Note:">
 					<textarea data-template>
-                        ## Exercise
+            ## Exercise
 
-                        For each of the data tables in `data/tidy`, check:
+            For each of the data tables in `data/tidy`, check:
 
-                        <ul>
-                            <li>What variables are included?</li>
-                            <li>What type of data do they contain (continuous, categorical, binary, date)?</li>
-                            <li class="fragment fade-in">In what format is this information stored?</li>
-                            <li class="fragment fade-in">Is this the most efficient way to store it?</li>
-                        </ul>
-                        
-                        ---
+            <ul>
+                <li>What variables are included?</li>
+                <li>What type of data do they contain (continuous, categorical, binary, date)?</li>
+                <li class="fragment fade-in">In what format is this information stored?</li>
+                <li class="fragment fade-in">Is this the most efficient way to store it?</li>
+            </ul>
+            
+            ---
 
-                        ## Data cleaning
+            ## Data cleaning
 
-                        - Input: a "raw" tidy data set
-                        - Objectives:
-                          - Understanding the contents of the data
-                          - Making the data set easy to understand and to use in statistical software
-                        - Output:
-                          - A data set containing the same information as before, but easier to handle in statistical software
-                          - Documentation about the contents of the data
+            - Input: a "raw" tidy data set
+            - Objectives:
+              - Understanding the contents of the data
+              - Making the data set easy to understand and to use in statistical software
+            - Output:
+              - A data set containing the same information as before, but easier to handle in statistical software
+              - Documentation about the contents of the data
 
-                        ---
+            ---
 
-                        ## Data format
+            ## Data format
 
-                        Statistical software usually have a preferred way of handling different types of data
-                        - In R:
-                          - Categorical variables are stored as factors
-                          - Binary variables are stored as booleans
-                          - Text variables are stored as characters
-                          - Numeric variables as stored as integers or numerics
+            Statistical software usually have a preferred way of handling different types of data
+            - In R:
+              - Categorical variables are stored as factors
+              - Binary variables are stored as booleans
+              - Text variables are stored as characters
+              - Numeric variables as stored as integers or numerics
 
-                        ---
+            ---
 
-                        ## Data format
+            ## Data format
 
-                        Statistical software usually have a preferred way of handling different types of data
-                        - In Stata:
-                          - Categorical variables are stored as labeled integers
-                          - Binary variables are stored as 0/1 integers
-                          - Text variables are stored as strings
-                          - Numeric variables are stored as bytes, ints, longs, floats, or doubles
+            Statistical software usually have a preferred way of handling different types of data
+            - In Stata:
+              - Categorical variables are stored as labeled integers
+              - Binary variables are stored as 0/1 integers
+              - Text variables are stored as strings
+              - Numeric variables are stored as bytes, ints, longs, floats, or doubles
 
-                        ---
+            ---
 
-                        ## Data format
+            ## Data format
 
-                        There are many advantages to using data in the software-specific format for each data type:
-                        - Using type-specific functions (for example for dates, text, and factors)
-                        - Pre-defined ways to represent information in graphs
-                        - Pre-defined ways to handle information in tables and regressions
-                        - Optmized data storage
+            There are many advantages to using data in the software-specific format for each data type:
+            - Using type-specific functions (for example for dates, text, and factors)
+            - Pre-defined ways to represent information in graphs
+            - Pre-defined ways to handle information in tables and regressions
+            - Optmized data storage
 
-                        ---
+            ---
 
-                        ## Data format
-                        
-                        Useful tool to identify data formats
+            ## Data format
+            
+            Useful tool to identify data formats
 
-                        - In Stata:
-                          - `codebook`
-                        - In R:
-                          - `skim` (from `skimr`)
-                          - `makeDataReport` (from `dataReporter`)
+            - In Stata:
+              - `codebook`
+            - In R:
+              - `skim` (from `skimr`)
+              - `makeDataReport` (from `dataReporter`)
 
-                        ---
+            ---
 
-                        ## Categorical variables
+            ## Categorical variables
 
-                        Useful tools to change the format of categorical variables
+            Useful tools to change the format of categorical variables
 
-                        - In R:
-                          - `factor`: encode a variable, define category labels, order factors
-                          - `as_factor`: change variable type from numeric or string to factor
-                          - `forcats` is a package to handle multiple categorical variable operations
-                        - In Stata:
-                          - `label value`: add category labels to numeric variables
-                          - `encode`: turn string variables into labeled integers
-                          - `iecodebook` (from `ietoolkit`): bulk recode and label variables
+            - In R:
+              - `factor`: encode a variable, define category labels, order factors
+              - `as_factor`: change variable type from numeric or string to factor
+              - `forcats` is a package to handle multiple categorical variable operations
+            - In Stata:
+              - `label value`: add category labels to numeric variables
+              - `encode`: turn string variables into labeled integers
+              - `iecodebook` (from `ietoolkit`): bulk recode and label variables
 
-                        ---
+            ---
 
-                        ## Missing values
+            ## Missing values
 
-                        - Primary data often includes survey codes used to indicate non-responses, such as "Declined to answer" or "Don't know"
-                        - Keeping these values in the data will bias estimates, so they should be replaced with missing values
-                        - Ideally, however, we want to keep the information that some missing values are different than others
-                        - In Stata, this can be acomplished using *extended* missing values (`.a`, ..., `.z`), which can also be labeled
+            - Primary data often includes survey codes used to indicate non-responses, such as "Declined to answer" or "Don't know"
+            - Keeping these values in the data will bias estimates, so they should be replaced with missing values
+            - Ideally, however, we want to keep the information that some missing values are different than others
+            - In Stata, this can be acomplished using *extended* missing values (`.a`, ..., `.z`), which can also be labeled
 
-                        ---
+            ---
 
-                        ## Missing values
+            ## Missing values
 
-                        Useful tools for handling missing values
+            Useful tools for handling missing values
 
-                        - In Stata:
-                          - `recode`
-                          - `mvdecode`
-                        - In R:
-                          - `na_if` (from `dplyr`)
+            - In Stata:
+              - `recode`
+              - `mvdecode`
+            - In R:
+              - `na_if` (from `dplyr`)
 
-                        ---
+            ---
 
-                        ## Data documentation
+            ## Data documentation
 
-                        **Data dictionary:** a list of the variables in the data, their definitions, types, codes, and additional metadata
+            **Data dictionary:** a list of the variables in the data, their definitions, types, codes, and additional metadata
 
-                        - In Stata: `iecodebook` (from `iefieldkit`)
-                        - In R: `dataMeta` and `datadictionary` packages
+            - In Stata: `iecodebook` (from `iefieldkit`)
+            - In R: `dataMeta` and `datadictionary` packages
 
-                        ---
+            ---
 
-                        ## Data documentation
+            ## Data documentation
 
-                        **Codebook** a summary of the contents of the data, such as share of missing values, number of unique values, and distribution
+            **Codebook** a summary of the contents of the data, such as share of missing values, number of unique values, and distribution
 
-                        - In Stata: 
-                          - `codebook`
-                          - `iesave` (from `ietoolkit`)
-                        - In R: 
-                          - `skimr`
+            - In Stata: 
+              - `codebook`
+              - `iesave` (from `ietoolkit`)
+            - In R: 
+              - `skimr`
 
-                        ---
+            ---
 
-                        ## Tracking changes to data
+            ## Tracking changes to data
 
-                        - As discussed earlier today, we are not allows to store data in github
-                        - However, storing codebooks is an efficient way to track changes to the data
-                        - It can also be a secure way to do so, as long as no sensitive data (e.g. examples of text values or gps coordinates) are included
+            - As discussed earlier today, we are not allows to store data in github
+            - However, storing codebooks is an efficient way to track changes to the data
+            - It can also be a secure way to do so, as long as no sensitive data (e.g. examples of text values or gps coordinates) are included
 
-                        ---
+            ---
 
-                        ## Tracking changes to data
+            ## Tracking changes to data
 
-                        - In Stata, `iesave` has an option called `report` that saves a markdown document with the codebook from a data set
-                        - In R, you can export the output of `skim` to a csv file
+            - In Stata, `iesave` has an option called `report` that saves a markdown document with the codebook from a data set
+            - In R, you can export the output of `skim` to a csv file
 
-                        </textarea>
-                    </section>
+          </textarea>
+        </section>
 
-                    <section data-background="#faa319">
-                        <h2>
-                            <span class="white">
-                                Exercise
-                            </span>
-                        </h2>
-                    </section>
-    
-                    <section data-markdown data-separator-notes="^Note:">
-                        <textarea data-template>
-                            ## Exercise
+        <section data-background="#faa319">
+            <h2>
+                <span class="white">
+                    Exercise
+                </span>
+            </h2>
+        </section>
 
-                            For each of the tidy data sets, answer:
-                            1. Convert each variable to the format that is most appropriate for it in the software you are using
-                            1. Save the new data set in the `data/clean` folder
-                            1. Save a data dictionary or data summary and in the same folder
+        <section data-markdown data-separator-notes="^Note:">
+            <textarea data-template>
+                ## Exercise
 
-                        </textarea>
-                    </section>
-                </div>
-            </div>
-    
-            <script src="dist/reveal.js"></script>
-            <script src="plugin/notes/notes.js"></script>
-            <script src="plugin/markdown/markdown.js"></script>
-            <script src="plugin/highlight/highlight.js"></script>
-            <script>
-                // More info about initialization & config:
-                // - https://revealjs.com/initialization/
-                // - https://revealjs.com/config/
-                Reveal.initialize({
-                    hash: true,
-    
-                    // Learn about plugins: https://revealjs.com/plugins/
-                    plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
-                });
-            </script>
-        </body>
-    </html>
-    
+                For each of the tidy data sets, answer:
+                1. Convert each variable to the format that is most appropriate for it in the software you are using
+                1. Save the new data set in the `data/clean` folder
+                1. Save a data dictionary or data summary and in the same folder
+
+            </textarea>
+        </section>
+      </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        // More info about initialization & config:
+        // - https://revealjs.com/initialization/
+        // - https://revealjs.com/config/
+        Reveal.initialize({
+            hash: true,
+
+            // Learn about plugins: https://revealjs.com/plugins/
+            plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+        });
+    </script>
+  </body>
+</html>
+
 
 

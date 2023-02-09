@@ -1,0 +1,292 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Data cleaning</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dil.css">
+
+        <script src="plugin/notes/notes.js"></script>
+        <script>
+            Reveal.initialize({
+                plugins: [ RevealNotes ]
+            });
+        </script>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						
+						<div id="left">
+							<img src="img/DIL_logo_safespace_RGBFull Color.svg" alt="DIL logo" width="400">
+						</div>
+												
+						# Data construction
+						February 10, 2023
+
+					</textarea>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<textarea data-template>
+                        ## Data construction
+
+                        <ul>
+                            <li class="fragment fade-in"><b>Inputs</b></li>
+                            <ul class="fragment fade-in">
+                                <li>A clean, tidy data set</li>
+                                <li>Documentation about the data and any issues found during data validation</li>
+                            </ul>
+                        </ul>
+                        <p>
+                            <ul class="fragment fade-in">
+                                <li><b>Objective:</b> create a data set that is useful not only from an analytics point of view, but from a research design point of view</li>
+                                <ul class="fragment fade-in">
+                                    <li>From unit of observation to unit of analysis</li>
+                                    <li>From observed measurements to economically meaningful indicators</li>
+                                </ul>
+                            </ul>
+                        </p>
+                        <ul class="fragment fade-in">
+                            <li><b>Output:</b> a data set (with one or more data tables) that can be used for all the analyses relevant for the project</li>
+                        </ul>
+                    </textarea>
+				</section>
+
+                <section data-background="#80001E">
+					<h2>Planning data construction</h2>
+				</section>
+
+                <section data-markdown data-separator-notes="^Note:">
+                    <textarea data-template>
+
+                        ## Planning data construction
+
+                        <ul>
+                            <li>What are all the outcomes of interest?</li>
+                            <li>At what level of observation will each of these outcomes be analyzed?</li>
+                            <li class="fragment fade-in">How can you get from the data you have to the data set you need?</li>
+                            <ul class="fragment fade-in">
+                                <li>From unit of observation to unit of analysis</li>
+                                <li>From observed measurements to economically meaningful indicators</li>
+                            </ul>
+                        </ul>
+
+                        <p class="highlight fragment fade-in">All of these decisions are informed by theory</p>
+
+                        ---
+
+                        ## Planning data construction
+
+                        <ol>
+                            <li>Map out dangerous steps</li>
+                            <ul class="fragment fade-in">
+                                <li>Joining data tables</li>
+                                <li>Changing units of observation</li>
+                                <li>Aggregating values</li>
+                            </ul>
+                        </ol>
+                        
+
+                        Note:
+                        - What are some dangerous steps?
+                        - why are these steps dangerous?
+                        - what can go wrong in each of them?
+
+                        ---
+
+                        ## Planning data construction
+
+                        <ol start = "2">
+                            <li>Anticipate what can go wrong</li>
+                            <ul class="fragment fade-in">
+                                <li>Are values measured in the same unit?</li>
+                                <li>How do commands treat missing values?</li>
+                                <li>How can you link data tables?</li>
+                                <li>How many observations do you have? How many should you have?</li>
+                            </ul>
+                        </ol>
+
+                        ---
+
+                        <img src="img/data-flow-chart.png" alt="Time it takes a hacker to brute force your password" width="900">
+
+                    </textarea>
+				</section>
+
+                <section data-background="#80001E">
+					<h2>Writing code for data construction</h2>
+				</section>
+
+                <section data-markdown data-separator-notes="^Note:">
+                    <textarea data-template>
+
+                        ## Joining (merging) data tables
+
+                        - In R: `join`
+                        - In Stata: `merge`
+
+                        <p class="highlight fragment fade-in"><b>What can go wrong?</b></p>
+                        <p class="highlight fragment fade-in">How can we test that this is not happening?</p>                    
+
+                        Note:
+                        - adding/removing observations
+                        - predict number of matches/mismatches
+                        - count number of observations before and after
+                        - check that they match the prediction
+
+                        ---
+
+                        ## Binding (appending) data tables
+
+                        - In R: `bind_rows`
+                        - In Stata: `append`
+
+                        <div class="fragment fade-in">
+                            <p class="highlight"><b>What can go wrong?</b></p>
+                            <p class="highlight ">How can we test that this is not happening?</p>  
+                        </div> 
+
+                        Note:
+                        - variable names don't match
+                        - differently coded values (categories)
+                        - different units of measurement
+
+                        ---
+
+                        ## Aggregating values by groups
+
+                        - In R: `group_by` + `summarise`
+                        - In Stata: `collapse`
+
+                        <div class="fragment fade-in">
+                            <p class="highlight"><b>What can go wrong?</b></p>
+                            <p class="highlight ">How can we test that this is not happening?</p>  
+                        </div>  
+
+                        Note:
+                        - missing values
+                        - `na.rm`
+                        - how collapse treats different operations differently
+
+                        ---
+
+                        ## Aggregating values across observations
+
+                        - In R: `group_by` + `summarise`
+                        - In Stata: `collapse`
+
+                        <div class="fragment fade-in">
+                            <p class="highlight"><b>What can go wrong?</b></p>
+                            <p class="highlight ">How can we test that this is not happening?</p>  
+                        </div> 
+
+                        Note:
+                        - missing values
+
+                        ---
+
+                        ## Aggregating values within observations
+
+                        - In R: `rowwise` + `mutate`
+                        - In Stata: `egen`
+
+                        <div class="fragment fade-in">
+                            <p class="highlight"><b>What can go wrong?</b></p>
+                            <p class="highlight ">How can we test that this is not happening?</p>  
+                        </div> 
+
+                        Note:
+                        - missing values
+                        - in R: rowwise is slow
+                        - Stata: + vs rowtotal
+
+                        ---
+
+                        ## Building checks into your code
+
+                        - In R: `assert_that`
+                        - In Stata: `assert`
+
+                    </textarea>
+				</section>
+                        
+                <section data-background="#80001E">
+                    <h2>Some opinionated advice</h2>
+                </section>
+
+                <section data-markdown data-separator-notes="^Note:">
+                    <textarea data-template>
+
+                        ## Some opinionated advice
+
+                        - Data construction should be the only point in your workflow where you are changing the *values* in the data (as opposed to the format of the data)
+                        - Create new variables instead of replacing the ones that were originally observed (so you can compare them)
+                        - Constructed variables should have intuitive and functional names
+                        - The order of variables in your constructed data set can make it easier or harder to find information in it
+                        - Keep a lot of documentation on the research decisions involved in data construction
+                          - Why did we choose to use one definition and not another?
+                          - When was this decision taken and by whom?
+
+                        ---
+
+                        ## Some opinionated advice
+
+                        - Literate programming tools like [quarto](https://quarto.org/), [RMarkdown](https://rmarkdown.rstudio.com/) and [markstat](https://grodri.github.io/markstat/) are very useful throughout data processing and analysis
+                        - They can be used to quickly compile documents with graphs and tables
+                        - But they can also be used to document data processing by writing actual text with your code instead of only writing occasional comments
+                        - You can find a short example [here](https://raw.githack.com/luizaandrade/r-example/main/assignment.html)
+
+                    </textarea>
+                </section>
+
+                <section data-background="#faa319">
+                    <h2>
+                        <span class="white">
+                            Exercise
+                        </span>
+                    </h2>
+                </section>
+
+                <section data-markdown data-separator-notes="^Note:">
+                    <textarea data-template>
+                        ## Exercise
+
+                        1. Choose at least one of the dangerous steps we talked about -- one that you do, have done or will do a lot.
+                        1. Look at the help files for the functions or commands discussed to program these steps.
+                        1. Write code to implement them.
+                        1. Write code to check that none of the possible issues we mentioned have occurred.
+                    </textarea>
+                </section>
+            </div>
+        </div>
+
+        <script src="dist/reveal.js"></script>
+        <script src="plugin/notes/notes.js"></script>
+        <script src="plugin/markdown/markdown.js"></script>
+        <script src="plugin/highlight/highlight.js"></script>
+        <script>
+            // More info about initialization & config:
+            // - https://revealjs.com/initialization/
+            // - https://revealjs.com/config/
+            Reveal.initialize({
+                hash: true,
+
+                // Learn about plugins: https://revealjs.com/plugins/
+                plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+            });
+        </script>
+  </body>
+</html>
+
+
+
