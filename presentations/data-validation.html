@@ -38,6 +38,18 @@
 
 				<section data-markdown data-separator-notes="^Note:">
 					<textarea data-template>
+                        ## Data validation
+
+                        - Input: a clean and tidy data set
+                        - Objectives:
+                          1. Ensuring that the data quality is as high as it can be
+                          1. Documenting patterns that may bias our analysis
+                        - Output:
+                          - A data set that is very similar do the initial one, but may contain some corrections
+                          - Documentation about any data quality issues found in the data
+                        
+                        ---
+                        
                         ## No data is safe from quality issues
 
                         Note: 
@@ -47,7 +59,7 @@
 
                         ---
 
-                        ## Objectives
+                        ## This session
 
                         <ul>
                             <li>Review what are common data issues to look up</li>
@@ -133,7 +145,9 @@
 
                         # Useful tools
 
-                        - Stata: `missing` 
+                        - Stata: 
+                          - `missing()` 
+                          - `misstable`
                         - R: 
                           - [`naniar`](https://naniar.njtierney.com/)
                           - `is.na`
