@@ -1,0 +1,164 @@
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Data ingestion</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dil.css">
+
+        <script src="plugin/notes/notes.js"></script>
+        <script>
+            Reveal.initialize({
+                plugins: [ RevealNotes ]
+            });
+        </script>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						
+						<div id="left">
+							<img src="img/DIL_logo_safespace_RGBFull Color.svg" alt="DIL logo" width="400">
+						</div>
+												
+						# Data ingestion
+						February 10, 2023
+
+					</textarea>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<textarea data-template>
+            ## What is the first thing you notice when you receive new data?
+
+            <div class="fragment fade-in">
+              <ul>
+                <li>File format</li>
+                <li>Size</li>
+                <li>Sensitivity</li>
+              </ul>
+            </div>
+            
+            ---
+            
+            ## What is the first thing you do when you receive new data?
+
+            <div class="fragment fade-in">
+              <ul>
+                <li>Decide where to store it</li>
+                <li>Save a protected copy</li>
+                <li>Open the data</li>
+              </ul>
+            </div>
+            
+            ---
+            
+            ## Where to store data
+            - According to UChicago guidelines, data should be stored in Box
+            - Box has a *lock* feature, that prevents files from being modified or deleted
+            - This feature should be used for any data that you cannot recreate
+            - Keep this original data in locked storage in the same file format and with the same content as you received
+            - You can save any necessary changes as new files
+
+            <p class="highlight fragment fade-in">
+              Ideally, decisions on folder structure and data storage plaftorms have already been made and documented ahead of time.
+              <div class="highlight fragment fade-in">
+                If that was not the case, take a moment to really think about it before you place data data somewhere you'll never find it again
+              </div>
+            </p>
+           
+            ---
+            
+            ## Where to store data
+
+            - Large data sets may need special storage
+            - We will talk more about options for big data when discussing cluster access
+
+            ---
+
+            ## Importing data
+
+            - We often receive data in formats that are not easy to open in statistical software
+            - The first thing you'll want to do if that applies to your data is to save it in a format that is appropriate for your software
+              - `.rds` for R
+              - `.dta` for Stata
+            - This will allow you to open the data faster and to preserve variable formats such as dates, factors and labels
+            - If your data contains dates or text, be mindful of how this information is encoded
+
+            ---
+
+            ## Useful tools to save data
+
+            - In R: 
+              - `save` + `load`
+              - `write_rds` + `read_rds` (from `readr`)
+            - In Stata:
+              - `save` + `use`
+              - `compress`
+              - `saveold`
+              - `iesave` (from `ietoolkit`)
+
+            ---
+
+            ## Working with sensitive data
+
+            - If you received sensitive data, but it is not strictly necessary for analysis, save sensitive data fields separately from non-sensitive ones
+            - Sensitive data requires specific workflows that may take more time to implement
+            - Make sure you have a way to reconnect sensitive and non-sensistive fields if needed
+
+            ---
+
+            ## What is the first thing you look for when you open new data set?
+
+            - Unit(s) of observation
+            - Variables included
+            - Type of information included
+
+            <p class="highlight fragment fade-in">
+              Please share data documentation with data files!
+            </p>
+
+            Note:
+            raise your hand if you ever received data with cryptic variable names and struggled to find out what they meant
+
+          </textarea>
+        </section>
+
+        <section data-background="#faa319">
+          <h2>
+              <span class="white">
+                  Exercise
+              </span>
+          </h2>
+        </section>
+            
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
