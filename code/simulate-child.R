@@ -5,7 +5,8 @@ packages <-
     "fabricatr",
     "tidyverse",
     "here",
-    "dataReporter"
+    "dataReporter",
+    "haven"
   )
 
 pacman::p_load(
@@ -34,9 +35,9 @@ children <-
       n_children = rpois(N, lambda = 2),
       flag_m_year = rbinom(N, 1, prob = .05),
       flag_m_age = rbinom(N, 1, prob = .1),
-      flag_n_age = runif(N, min = -5, max = 5),
+      flag_n_age = runif(N, min = -5, max = 5) %>% round(0),
       flag_m_children = rbinom(N, 1, prob = .05),
-      flag_n_children = runif(N, min = -1, max = 2)
+      flag_n_children = runif(N, min = -1, max = 2) %>% round(0)
     ),
     child_index = add_level(
       N = n_children,
@@ -104,6 +105,26 @@ mother_tidy %>%
     )
   )
 
+mother_tidy %>%
+  select(-mother_index) %>%
+  write_rds(
+    here(
+      "data",
+      "tidy",
+      "mother.rds"
+    )
+  )
+
+mother_tidy %>%
+  select(-mother_index) %>%
+  write_dta(
+    here(
+      "data",
+      "tidy",
+      "mother.dta"
+    )
+  )
+
 # Create child-level tidy data -------------------------------------------------
 
 child_tidy <-
@@ -137,6 +158,26 @@ child_tidy %>%
       "data",
       "tidy",
       "child.csv"
+    )
+  )
+
+child_tidy %>%
+  select(-child_no) %>%
+  write_rds(
+    here(
+      "data",
+      "tidy",
+      "child.rds"
+    )
+  )
+
+child_tidy %>%
+  select(-child_no) %>%
+  write_dta(
+    here(
+      "data",
+      "tidy",
+      "child.dta"
     )
   )
 
@@ -207,5 +248,23 @@ child_final %>%
       "data",
       "analysis",
       "child.csv"
+    )
+  )
+
+child_final %>%
+  write_rds(
+    here(
+      "data",
+      "analysis",
+      "child.rds"
+    )
+  )
+
+child_final %>%
+  write_dta(
+    here(
+      "data",
+      "analysis",
+      "child.dta"
     )
   )
