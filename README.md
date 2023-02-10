@@ -2,7 +2,7 @@
 
 ## Presentations
 
-- [Research data work: an overview]()
+- [Research data work: an overview](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/research-data-work.html)
 - [Data security](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-security.html)
 - [Data ingestion](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-ingestion.html)
 - [Data tidying](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/tidy-data.html)
