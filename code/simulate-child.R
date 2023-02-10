@@ -78,7 +78,7 @@ children <-
 
 mother_tidy <-
   children %>%
-  select(-c(child_index:in_school)) %>%
+  select(-c(child_index:grade)) %>%
   unique %>%
   group_by(village_id) %>%
   transmute(
@@ -183,11 +183,11 @@ child_tidy %>%
 
 # Create mother-level wide data ------------------------------------------------
 
-mother_level <-
+mother_raw <-
   child_tidy %>%
-  select(-child_id) %>%
+  select(-c(child_id, village_id)) %>%
   pivot_wider(
-    values_from = c("age", "sex", "in_school"),
+    values_from = c("age", "sex", "in_school", "yob", "grade"),
     names_from = "child_no"
   ) %>%
   left_join(
@@ -196,7 +196,7 @@ mother_level <-
     by = "mother_id"
   )
 
-mother_level %>%
+mother_raw %>%
   select(-mother_index) %>%
   write_csv(
     here(
