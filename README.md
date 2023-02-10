@@ -8,4 +8,3 @@
 - [Data validation](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-validation.html)
 - [Data construction](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-construction.html)
 - [Data analysis]()
-- [Reproducibility packages]()
