@@ -1,0 +1,299 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+		<title>Data analysis</title>
+
+		<link rel="stylesheet" href="dist/reset.css">
+		<link rel="stylesheet" href="dist/reveal.css">
+		<link rel="stylesheet" href="dist/theme/dil.css">
+
+        <script src="plugin/notes/notes.js"></script>
+        <script>
+            Reveal.initialize({
+                plugins: [ RevealNotes ]
+            });
+        </script>
+
+		<!-- Theme used for syntax highlighted code -->
+		<link rel="stylesheet" href="plugin/highlight/monokai.css">
+	</head>
+	<body>
+		<div class="reveal">
+			<div class="slides">
+				<section data-markdown>
+					<textarea data-template>
+						
+						<div id="left">
+							<img src="img/DIL_logo_safespace_RGBFull Color.svg" alt="DIL logo" width="400">
+						</div>
+												
+						# Data analysis
+						February 10, 2023
+
+					</textarea>
+				</section>
+
+        <section data-markdown data-background="#80001E" data-separator-notes="^Note:">
+          <textarea data-template>
+            ## Story time
+
+            Note:
+            - My PI likes to use overleaf, and before every meeting I need to upload all the new analysis results to the website and recompile the document
+            - My PI asked me to run some complicated regressions. I spent a lot of time and energy getting the code to run. When it finally did, 
+            I outputted it into a table and shared it with my PI, who immediately noticed the number of observations was varying a lot from one column to the other
+            - My PI decided to change the set of control variables for all analysis in a project and it took me a long time to find all the different lines in all the different scripts where I listed the controls
+            - My results changed every time I ran a regression
+            - My PI asked me to do some initial analysis. I created a table and exported it to Excel. They asked me to do some very specific formating on Excel and I did it, 
+            but then they decided to make a lot of changes to the analysis and for every change I had to spend a lot of time formatting the table again only for them to decide they wanted try to something else
+          </textarea>
+				</section>
+
+        <section data-markdown data-background="#80001E" data-separator-notes="^Note:">
+          <textarea data-template>
+            # Writing analysis code
+          </textarea>
+				</section>
+
+				<section data-markdown data-separator-notes="^Note:">
+					<textarea data-template>
+
+            ## When it comes to *coding*, analysis is the easy part
+
+            ---
+
+            ## A good analysis script
+
+            <ol>
+              <li class="fragment fade-in">Starts with a fresh workspace</li>
+              <li class="fragment fade-in">Loads the data created during construction</li>
+              <li class="fragment fade-in">Runs a regression, calculates summary statistics code or creates a graph</li>
+              <li class="fragment fade-in">Displays or exports results</li>
+            </ol>
+
+            Note:
+            - it starts with a fresh workspace so it does not depend on having run anything in particular before
+            - note that there is no data processing going on
+            
+            ---
+
+            ## A good analysis script
+
+            - Makes research decisions clear
+            - Has simple code that allows the reader to focus on the model
+            - Makes it easy to understand which results are coming from each part of the code
+            - Is easy to maintain even if research decisions change
+
+            ---
+
+            ## Applying good coding practices to analysis code
+
+            ---
+
+            ## Maintainability
+
+            <div class="highlight">
+              <b>The DRY rule:</b>
+              "Every piece of knowledge must have a single, unambiguous, authoritative representation within a system"
+            </div>
+
+            ---
+
+            ## Modularity
+
+            <div class="highlight">
+              <b>Modular programming</b> is a software design technique that emphasizes separating the functionality of a program into independent, interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired functionality.
+            </div>
+
+            ---
+
+            ## Don't reinvent the wheel
+
+            <ul>
+              <li>There are plenty of existing packages for statistical analysis and presentation of results</li>
+              <li>Canned functions often go through some sort of review</li>
+              <li>They are also usually programmed to handle errors and edge cases</li>
+              <li class="fragment fade-in">Don't try to write code from scratch unless there is no other way to implement your analysis</li>
+              <li class="fragment fade-in">If you are not 100% confident about a package, test it and compare results with those of another software</li>
+            </ul>
+
+            ---
+
+            ## More opinionated advice
+
+            - Define research inputs such as outcomes and controls in one place, and retrieve these inputs when needed
+            - Use functions to simplify and standardize aspects of the code that are not related to the research, such as graphics themes and table formatting
+            - Use file names and document outlines to connect code to specific results
+
+          </textarea>
+				</section>
+
+        <section data-markdown data-background="#80001E" data-separator-notes="^Note:">
+          <textarea data-template>
+            # Common issues in data analysis
+          </textarea>
+				</section>
+
+        <section data-markdown data-separator-notes="^Note:">
+          <textarea data-template>
+            ## Unstable results
+
+            <ul>
+              <li>The most common source of unstable results are random processes</li>
+              <ul>
+                <li class="fragment fade-in">Remember to set a seed if they are present in your code</li>
+                <li class="fragment fade-in">Software version can also make a different here</li>
+              </ul>
+              <li class="fragment fade-in">In Stata, the order of observations may also matter -- and it should not!</li>
+            </ul>
+
+            ---
+
+            ## Unstable results
+
+            - An easy way to find out if your results are unstable is to track changes to them
+            - Export tables to TeX or csv and track them using git
+            - GitHub can also track changes to images
+            - Rerun analysis after making changes to the data even if the analysis scripts didn't change and check if your results are changing
+
+            ---
+
+            ## Using categorical variables correctly
+
+            - Stata does not automatically recognize labeled variables as categorical variables
+            - To control for different categories of a variable, use factors in R and the `i.` operator in Stata
+            - Avoid creating a series of dummies to represent each individual category
+            - If you are not interested in the coefficients of fixed effects, use commands that don't report them automatically
+
+            ---
+
+            ## Using interactions correctly
+
+            <ul>
+              <li>Both R and Stata have built-in interaction operations</li>
+              <li>Using built-in operations instead of manually multiplying variables is one example of how not to reinvent the wheel</li>
+              <li class="fragment fade-in">What is the difference between `#` and `##` in Stata?</li>
+              <li class="fragment fade-in">In R, apart from the base `*` operator, `fixest` offers additional interaction functionality </li>
+            </ul> 
+
+            Note:
+            - why not manually calculate interaction variables?
+          </textarea>
+				</section>
+
+        <section data-markdown data-background="#80001E" data-separator-notes="^Note:">
+          <textarea data-template>
+            # A workflow for data analysis
+          </textarea>
+				</section>
+
+        <section data-markdown data-separator-notes="^Note:">
+          <textarea data-template>
+            ## Start simple
+
+            <ul>
+              <li>It's helpful to start writing analysis code with the most simple version of a model, even if you don't plan to report these results</li>
+              <ul>
+                <li>Run a linear model before trying something more complex</li>
+                <li>Add only a few covariates at a time</li>
+                <li>IDf working with large data sets, use only a subsample at first</li>
+                <li>You can even work with simulated data if you don't have the real data yet</li>
+              </ul>
+              <li class="fragment fade-in">Use this opportunity to test your code and methods</li>
+              <ul class="fragment fade-in">
+                <li>Make the code more efficient</li>
+                <li>Think about the best practices discussed before</li>
+                <li>Make sure you understand your modelling choices</li>
+              </ul>
+            </ul> 
+            
+            ---
+
+            ## Start simple
+
+            - For initial and exploratory results, you want to be able to update outputs quickly
+            - These outputs will typically only be used by people in the research team who are familiar with the project
+            - Markdown documents are a great solution for this, with the added advantage of being able to see the code
+            - Don't stress too much about the perfect formatting for every single table and figure
+            - Iterate on this format of document until you know what results you want to present
+
+            ---
+
+            ## But be mindful of details
+
+            - When your code runs, you are only half done!
+            - Spend some time interpreting results and understanding them before sharing them with PIs
+            - Think critically about the numbers you see: 
+              - Do they make sense to you?
+              - What additional questions can you anticipate based on the results?
+
+            ---
+
+            ## Polishing final outputs
+
+            - You want to minimize the number of times you will make precise adjustments to the aesthetics of outputs
+            - But at least one team member needs to learn the nitty gritty of formatting tables and creating graphs
+            - Agree on a style before you start formatting tables and figures
+            - Have in mind who is the audience of the outputs while doing so
+            - Remeber that tables and figures should be self-standing: labels and detailed notes are important
+
+            ---
+
+            ## Writing code for final outputs
+
+            - Automate the creation of outputs and final documents as much as possible
+            - Stay away from workflows that rely on copy-pasting
+            - Use accessible formats to save output (png, svg, tex, csv)
+            - In Stata: `outreg2`, `esttab`, `graph export`
+            - In R: `stargazer`, `huxtable`, `kable`, `modelsummary`, `ggsave`
+            
+          </textarea>
+				</section>
+
+        <section data-background="#faa319">
+          <h2>
+            <span class="white">
+              Exercises
+            </span>
+          </h2>
+				</section>
+
+        <section data-markdown data-separator-notes="^Note:">
+          <textarea data-template>
+            ## Exercise
+
+            - If you haven't yet, choose a reproducibility package from the list to work on
+            - Try to find out which part of the script creates which exhibit without looking at the read me file
+            - Take a closer look at the analysis code and see if you can come up with suggestions on how to improve it
+
+            ---
+
+            ## Exercise
+
+            - Choose one of the visualizations in the paper and see how well it does according to [this checklist](https://stephanieevergreen.com/rate-your-visualization/)
+            - Choose one of the tables in the paper and see how many of the items in [this checklist](https://devinnovationlab.github.io/guides/templates/paper-submission.html#review-results-and-summary-statistics-tables) it satisfies
+          </textarea>
+				</section>
+
+			</div>
+		</div>
+
+		<script src="dist/reveal.js"></script>
+		<script src="plugin/notes/notes.js"></script>
+		<script src="plugin/markdown/markdown.js"></script>
+		<script src="plugin/highlight/highlight.js"></script>
+		<script>
+			// More info about initialization & config:
+			// - https://revealjs.com/initialization/
+			// - https://revealjs.com/config/
+			Reveal.initialize({
+				hash: true,
+
+				// Learn about plugins: https://revealjs.com/plugins/
+				plugins: [ RevealMarkdown, RevealHighlight, RevealNotes ]
+			});
+		</script>
+	</body>
+</html>
