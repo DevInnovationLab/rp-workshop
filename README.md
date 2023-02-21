@@ -2,14 +2,14 @@
 
 ## Presentations
 
-- [Research data work: an overview](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/research-data-work.html)
-- [Data security](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-security.html)
-- [Data ingestion](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-ingestion.html)
-- [Data tidying](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/tidy-data.html)
-- [Data cleaning](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-cleaning.html)
-- [Data validation](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-validation.html)
-- [Data construction](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-construction.html)
-- [Data analysis](https://raw.githack.com/DevInnovationLab/rp-workshop/main/presentations/data-analysis.html)
+- [Research data work: an overview](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/research-data-work.html)
+- [Data security](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-security.html)
+- [Data ingestion](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-ingestion.html)
+- [Data tidying](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/tidy-data.html)
+- [Data cleaning](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-cleaning.html)
+- [Data validation](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-validation.html)
+- [Data construction](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-construction.html)
+- [Data analysis](https://raw.githack.com/DevInnovationLab/trainings-public/main/rp-workshop/data-analysis.html)
 
 ## Examples of reproduciblity packages
 
